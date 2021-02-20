@@ -8,7 +8,7 @@ on:
     branches: main
   workflow_dispatch:
   schedule:
-    - cron: '27 1 * * *'
+    - cron: '10 1 * * *'
     # cron表达式，Actions时区是UTC时间，所以上午9点要往前推8个小时
 
 
@@ -36,7 +36,9 @@ jobs:
           DEDEUSERID: ${{ secrets.DEDEUSERID }}
           SESSDATA: ${{ secrets.SESSDATA }}
           SERVERPUSHKEY: ${{ secrets.SERVERPUSHKEY }}
+          TELEGRAMBOTTOKEN: ${{ secrets.TELEGRAMBOTTOKEN }}
+          TELEGRAMCHATID: ${{ secrets.TELEGRAMCHATID }}
           TZ: Asia/Shanghai
           # 时区配置为Asia/Shanghai
         run:
-          mvn compile exec:java -Dexec.mainClass="top.misec.BiliMain" -Dexec.args="${DEDEUSERID} ${SESSDATA} ${BILI_JCT} ${SERVERPUSHKEY}"
+          mvn compile exec:java -Dexec.mainClass="top.misec.BiliMain" -Dexec.args="${DEDEUSERID} ${SESSDATA} ${BILI_JCT} ${SERVERPUSHKEY} ${TELEGRAMBOTTOKEN} ${TELEGRAMCHATID}"
